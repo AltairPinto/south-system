@@ -1,12 +1,17 @@
+import { Skeleton } from '@material-ui/lab';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { BookCard, LoadingCard, Pagination } from '..';
+import { useSelector } from 'react-redux';
+import { BookCard, LoadingCard, NotFound, Pagination } from '..';
 import { Book } from '../../services/types';
+import { ApplicationState } from '../../store';
 
 import './styles.scss';
 
 const BookSearch: React.FC = () => {
+  const word = useSelector((state: ApplicationState) => state.word);
+
   const [books, handleBooks] = useState<Book[]>([]);
   const [totalItems, handleTotalItems] = useState<number>(0);
   const [currentPage, handleCurrentPage] = useState<number>(1);
@@ -33,52 +38,71 @@ const BookSearch: React.FC = () => {
   };
 
   useEffect(() => {
-    handleLoading(true);
-    axios
-      .get(
-        process.env.REACT_APP_API_URL +
-          '?q=a' +
-          '&key=' +
-          process.env.REACT_APP_API_KEY +
-          '&maxResults=' +
-          booksPerPage +
-          '&orderBy=newest&startIndex=' +
-          startIndex,
-      )
-      .then(data => {
-        if (data.data) {
-          const { totalItems, items } = data.data;
-          handleTotalItems(totalItems);
-          handleBooks(items);
+    if (word.data) {
+      handleLoading(true);
+      axios
+        .get(
+          process.env.REACT_APP_API_URL +
+            '?q=' +
+            word.data +
+            '&key=' +
+            process.env.REACT_APP_API_KEY +
+            '&maxResults=' +
+            booksPerPage +
+            '&orderBy=newest&startIndex=' +
+            startIndex,
+        )
+        .then(data => {
+          if (data.data) {
+            const { totalItems, items } = data.data;
+            handleTotalItems(totalItems);
+            handleBooks(items);
+            handleLoading(false);
+          }
+        })
+        .catch(() => {
           handleLoading(false);
-        }
-      })
-      .catch(() => {
-        handleLoading(false);
-      });
-  }, [currentPage, startIndex]);
+        });
+    }
+  }, [currentPage, startIndex, word]);
 
   return (
-    <Col xs={12} sm={12} md={12} lg={12} xl={12} className="book-search mt-4">
-      <h3 className="justify-content pt-2 pb-2">
-        Total de livros encontrados: {totalItems}
-      </h3>
-      <Row className="mt-4">
-        {loading
-          ? loadingPage()
-          : books?.map((book: Book) => (
-              <Col key={book.etag} xs={12} sm={12} md={6} lg={3} xl={3}>
-                <BookCard {...book} />
-              </Col>
-            ))}
-      </Row>
-      <Col>
-        <Pagination
-          totalPosts={totalItems as number}
-          postsPerPage={booksPerPage}
-          paginate={paginate}
-        />
-      </Col>
+    <Col
+      xs={12}
+      sm={12}
+      md={12}
+      lg={12}
+      xl={12}
+      className="book-search fade-in mt-4"
+    >
+      {word.data && totalItems > 0 && (
+        <>
+          <h3 className="justify-content pt-2 pb-2">
+            {totalItems > 0 && !loading ? (
+              <>Total de livros encontrados: {totalItems}</>
+            ) : (
+              <Skeleton animation="wave" variant="text" width="100%" />
+            )}
+          </h3>
+          <Row className="fade-in mt-4">
+            {loading
+              ? loadingPage()
+              : books?.map((book: Book) => (
+                  <Col key={book.etag} xs={12} sm={12} md={6} lg={3} xl={3}>
+                    <BookCard {...book} />
+                  </Col>
+                ))}
+          </Row>
+          <Col>
+            <Pagination
+              totalPosts={totalItems as number}
+              postsPerPage={booksPerPage}
+              paginate={paginate}
+            />
+          </Col>
+        </>
+      )}
+      {totalItems === 0 && word.data && !loading && <NotFound />}
     </Col>
   );
 };

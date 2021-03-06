@@ -7,16 +7,19 @@ import {
   OverlayTrigger,
   Tooltip,
 } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { updateWord } from '../../store/ducks/word/action';
 import FontAwesome from '../FontAwesome';
 
 import './styles.scss';
 
 const SearchBar: React.FC = () => {
+  const dispatch = useDispatch();
   const [bookTitle, handleBookTitle] = useState<string>('');
 
   const searchBook = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(bookTitle);
+    dispatch(updateWord(bookTitle));
   };
   return (
     <Navbar className="search-bar" bg="dark" expand="lg">

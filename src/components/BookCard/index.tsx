@@ -65,7 +65,8 @@ const BookCard: React.FC<BookType> = book => {
           </Card.Title>
           <Card.Text>{description ? description : 'Sem descrição'}</Card.Text>
           <Row className="justify-content">
-            <Col xs={6}>
+            <Col xs={2}>x</Col>
+            <Col xs={5}>
               <Card.Subtitle>
                 {saleInfo.listPrice && (
                   <b>
@@ -77,7 +78,7 @@ const BookCard: React.FC<BookType> = book => {
                 )}
               </Card.Subtitle>
             </Col>
-            <Col xs={6}>
+            <Col xs={5}>
               <Card.Link
                 className="float-right"
                 href={previewLink}
