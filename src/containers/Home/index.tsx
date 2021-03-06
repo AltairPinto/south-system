@@ -1,9 +1,13 @@
 import React from 'react';
-
-// import { Container } from './styles';
+import { BookSearch, SearchBar } from '../../components';
 
 const Home: React.FC = () => {
-  return <div />;
+  return (
+    <>
+      <SearchBar />
+      <BookSearch />
+    </>
+  );
 };
 
 export default Home;
