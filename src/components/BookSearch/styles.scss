@@ -2,6 +2,10 @@
 
 .book-search {
   font: 24px/12px Quicksand-Regular;
-  // background-color: rgba($color: $white, $alpha: 0.9);
+
+  h2 {
+    background-color: rgba($color: $white, $alpha: 0.9);
+  }
+
   border-radius: 25px;
 }

@@ -55,6 +55,5 @@ export const refactorAuthors = (authors: string[]) => {
       result += `${word}, `;
     }
   });
-  console.log('result', result);
   return result;
 };

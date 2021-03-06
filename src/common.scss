@@ -103,7 +103,7 @@ body {
   background-color: #f3f3f4 !important;
   background-position: center !important;
   background-repeat: no-repeat;
-  // background-attachment: fixed !important;
+  background-attachment: fixed !important;
   background-size: 100%;
 
   @media only screen and (min-width: 1000px) {}
@@ -206,4 +206,16 @@ a {
 
 html {
   overflow: inherit;
+}
+
+.MuiPagination-ul {
+  .MuiPaginationItem-root {
+    color: black !important;
+    outline: none;
+  }
+
+  .MuiPaginationItem-page.Mui-selected {
+    color: $blue !important;
+    background-color: transparent;
+  }
 }

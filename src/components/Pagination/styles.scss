@@ -2,8 +2,11 @@
 
 .container-pagination {
   justify-content: space-between;
+  background-color: rgba($color: $white, $alpha: 0.9);
+  padding: 10px;
 
   p {
-    color: $gray_icons;
+    padding: 5px 5px;
+    color: black;
   }
 }

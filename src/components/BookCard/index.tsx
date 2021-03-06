@@ -24,7 +24,7 @@ const BookCard: React.FC<BookType> = book => {
           <Card.Subtitle className="mb-2 text-muted">
             {authors ? refactorAuthors(authors) : 'Autor não identificado'}
           </Card.Subtitle>
-          <Card.Text>{description}</Card.Text>
+          <Card.Text>{description ? description : 'Sem descrição'}</Card.Text>
           <Card.Link className="float-right" href={selfLink}>
             Saiba mais
           </Card.Link>
