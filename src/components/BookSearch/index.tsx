@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Spinner } from 'react-bootstrap';
-import { BookCard } from '..';
+import { BookCard, LoadingCard, Pagination } from '..';
 import { Book } from '../../services/types';
-import Pagination from '../Pagination';
 
 import './styles.scss';
 
@@ -20,6 +19,18 @@ const BookSearch: React.FC = () => {
   const paginate = (pageNumber: number) => handleCurrentPage(pageNumber);
 
   const [loading, handleLoading] = useState<boolean>(false);
+
+  const loadingPage = () => {
+    const loadingArr = [];
+    for (let i = 0; i < 8; i++) {
+      loadingArr.push(
+        <Col key={i} xs={12} sm={12} md={6} lg={3} xl={3}>
+          <LoadingCard />
+        </Col>,
+      );
+    }
+    return loadingArr;
+  };
 
   useEffect(() => {
     handleLoading(true);
@@ -39,7 +50,6 @@ const BookSearch: React.FC = () => {
           const { totalItems, items } = data.data;
           handleTotalItems(totalItems);
           handleBooks(items);
-          // console.log('data.data', data.data);
           handleLoading(false);
         }
       })
@@ -47,29 +57,20 @@ const BookSearch: React.FC = () => {
         handleLoading(false);
       });
   }, [currentPage]);
+
   return (
     <Col xs={12} sm={12} md={12} lg={12} xl={12} className="book-search mt-4">
       <h2 className="justify-content pt-2 pb-2">
         Total de livros encontrados: {totalItems}
       </h2>
       <Row className="mt-4">
-        {loading ? (
-          <div className="spinner-loading">
-            <Spinner
-              as="span"
-              animation="border"
-              role="status"
-              aria-hidden="true"
-              className="spinner-blue"
-            />
-          </div>
-        ) : (
-          books?.map((book: Book) => (
-            <Col key={book.id} xs={12} sm={12} md={6} lg={3} xl={3}>
-              <BookCard {...book} />
-            </Col>
-          ))
-        )}
+        {loading
+          ? loadingPage()
+          : books?.map((book: Book) => (
+              <Col key={book.id} xs={12} sm={12} md={6} lg={3} xl={3}>
+                <BookCard {...book} />
+              </Col>
+            ))}
       </Row>
       <Col>
         <Pagination
