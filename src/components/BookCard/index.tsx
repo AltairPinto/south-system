@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Col, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { refactorAuthors } from '../../services/mask';
 import { Book as BookType } from '../../services/types';
+import { ApplicationState } from '../../store';
+import {
+  removeFavorites,
+  updateFavorites,
+} from '../../store/ducks/favorites/action';
 
 import './styles.scss';
 
 const BookCard: React.FC<BookType> = book => {
+  const favorites = useSelector((state: ApplicationState) => state.favorites);
+  const dispatch = useDispatch();
+  const [favorite, handleFavorite] = useState<boolean>(false);
   const { volumeInfo, saleInfo } = book;
   const { authors, title, description, previewLink } = volumeInfo;
+
+  const checkFavorite = () => {
+    if (favorites.data.length) {
+      console.log('favorites.data', favorites.data);
+      const result = favorites.data.filter(
+        (favorite: BookType) => favorite.id === book.id,
+      );
+      if (result.length > 0) handleFavorite(true);
+      else return false;
+    }
+  };
+
   return (
     <Card className="book-card">
       {volumeInfo && (
@@ -65,7 +86,33 @@ const BookCard: React.FC<BookType> = book => {
           </Card.Title>
           <Card.Text>{description ? description : 'Sem descrição'}</Card.Text>
           <Row className="justify-content">
-            <Col xs={2}>x</Col>
+            <Col xs={2} className="favorite">
+              <OverlayTrigger
+                overlay={
+                  <Tooltip id={book.id + '_i_' + book.etag}>
+                    {favorite
+                      ? 'Remover dos favoritos'
+                      : 'Adicionar aos favoritos'}
+                  </Tooltip>
+                }
+                key={book.id + '_i_' + book.etag}
+                placement="top"
+              >
+                <img
+                  src={
+                    favorite
+                      ? require('../../images/stars/10.svg')
+                      : require('../../images/stars/0.svg')
+                  }
+                  alt="favorite"
+                  onClick={() =>
+                    favorite
+                      ? dispatch(removeFavorites(book))
+                      : dispatch(updateFavorites(book))
+                  }
+                />
+              </OverlayTrigger>
+            </Col>
             <Col xs={5}>
               <Card.Subtitle>
                 {saleInfo.listPrice && (

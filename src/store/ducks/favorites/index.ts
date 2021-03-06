@@ -2,11 +2,11 @@ import { Reducer } from 'redux';
 import { FavoritesState, FavoritesTypes } from './types';
 
 const data = JSON.parse(
-  localStorage.getItem(process.env.REACT_APP_LOCAL_STORAGE || '[]') || '',
+  localStorage.getItem(process.env.REACT_APP_LOCAL_STORAGE || '') || '[]',
 );
 
 const INITIAL_STATE: FavoritesState = {
-  data: data,
+  data: data.data || [],
 };
 
 const reducer: Reducer<FavoritesState> = (state = INITIAL_STATE, action) => {
@@ -14,19 +14,26 @@ const reducer: Reducer<FavoritesState> = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case FavoritesTypes.UPDATE_FAVORITES:
-      updatedFavoritesState.data = action.payload;
+      updatedFavoritesState.data.push(action.payload);
       localStorage.setItem(
         process.env.REACT_APP_LOCAL_STORAGE || '',
-        JSON.stringify(action.payload),
+        JSON.stringify(updatedFavoritesState.data),
       );
 
       return { ...state, ...updatedFavoritesState };
 
     case FavoritesTypes.REMOVE_FAVORITES:
-      INITIAL_STATE.data = [];
-      localStorage.removeItem(process.env.REACT_APP_LOCAL_STORAGE || '');
-
-      return { ...state, ...INITIAL_STATE };
+      const tempFavorites = updatedFavoritesState.data.indexOf(action.payload);
+      console.log('tempFavorites', tempFavorites);
+      updatedFavoritesState.data.splice(tempFavorites, 1);
+      localStorage.setItem(
+        process.env.REACT_APP_LOCAL_STORAGE || '',
+        JSON.stringify(updatedFavoritesState.data),
+      );
+      if (!updatedFavoritesState.data.length) {
+        localStorage.removeItem(process.env.REACT_APP_LOCAL_STORAGE || '');
+      }
+      return { ...state, ...updatedFavoritesState };
 
     default:
       return state;
