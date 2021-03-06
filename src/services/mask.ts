@@ -45,3 +45,16 @@ export const currencyConvert = (value: string) => {
   v = `${(+v / 100).toFixed(3)}`;
   return v;
 };
+
+export const refactorAuthors = (authors: string[]) => {
+  let result = '';
+  authors.map((word: string, index: number) => {
+    if (index === authors.length - 1) {
+      result += word;
+    } else {
+      result += `${word}, `;
+    }
+  });
+  console.log('result', result);
+  return result;
+};
