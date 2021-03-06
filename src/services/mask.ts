@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 export const removeSpecialChars = (specialChar: string) => {
   let newString = specialChar;
   newString = newString.replace(/[|&;$%@"<>()+,/]/g, '');
@@ -34,6 +32,7 @@ export const currencyMask = (value: string) => {
   v = v.replace(/(\d)(\d{3}),/g, '$1.$2,');
   return v;
 };
+
 export const currencyConvert = (value: string) => {
   if (value === '') {
     return '';
@@ -48,12 +47,14 @@ export const currencyConvert = (value: string) => {
 
 export const refactorAuthors = (authors: string[]) => {
   let result = '';
-  authors.map((word: string, index: number) => {
-    if (index === authors.length - 1) {
-      result += word;
-    } else {
-      result += `${word}, `;
-    }
-  });
+  if (authors) {
+    authors.map((word: string, index: number) => {
+      if (index === authors.length - 1) {
+        return (result += word);
+      } else {
+        return (result += `${word}, `);
+      }
+    });
+  }
   return result;
 };

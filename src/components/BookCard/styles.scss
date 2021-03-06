@@ -2,12 +2,16 @@
 
 .book-card {
   width: 100%;
-  height: 280px;
+  height: 355px;
   border: 1px solid $gray;
   border-radius: 10px !important;
   margin-bottom: 10px;
   transition: transform .2s;
-  /* Animation */
+
+  img {
+    border: 1px solid $gray_texts;
+    border-radius: 5px;
+  }
 
   &:hover {
     transform: scale(1.05);
@@ -15,28 +19,38 @@
 
   .card-title {
     color: $blue;
-    height: 40px;
+    max-height: 180px;
   }
 
   .card-subtitle {
-    height: 40px;
+
+    b {
+      font: 16px/22px Quicksand-Bold;
+    }
+
     margin-top: 5px;
     color: black;
   }
 
   .card-text {
-    font: 16px/22px Quicksand-Regular;
+    font: 16px/20px Quicksand-Regular;
     color: black;
     text-align: justify;
-    height: 110px;
+    height: 90px;
     overflow-y: auto;
     border: 1px solid $blue;
-    border-radius: 10px;
-    padding: 7px 5px;
+    border-radius: 5px;
+    padding: 5px 5px;
   }
 
   .card-link {
     font: 16px/16px Quicksand-Regular;
+  }
+
+  .card-end {
+    .float-left {
+      display: flex;
+    }
   }
 
 }

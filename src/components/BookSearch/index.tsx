@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Spinner } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { BookCard, LoadingCard, Pagination } from '..';
 import { Book } from '../../services/types';
 
@@ -53,21 +53,21 @@ const BookSearch: React.FC = () => {
           handleLoading(false);
         }
       })
-      .catch(e => {
+      .catch(() => {
         handleLoading(false);
       });
-  }, [currentPage]);
+  }, [currentPage, startIndex]);
 
   return (
     <Col xs={12} sm={12} md={12} lg={12} xl={12} className="book-search mt-4">
-      <h2 className="justify-content pt-2 pb-2">
+      <h3 className="justify-content pt-2 pb-2">
         Total de livros encontrados: {totalItems}
-      </h2>
+      </h3>
       <Row className="mt-4">
         {loading
           ? loadingPage()
           : books?.map((book: Book) => (
-              <Col key={book.id} xs={12} sm={12} md={6} lg={3} xl={3}>
+              <Col key={book.etag} xs={12} sm={12} md={6} lg={3} xl={3}>
                 <BookCard {...book} />
               </Col>
             ))}

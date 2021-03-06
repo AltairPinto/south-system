@@ -10,14 +10,25 @@ const LoadingCard: React.FC = () => {
       <CardHeader
         action={null}
         title={
-          <Skeleton
-            animation="wave"
-            height={10}
-            width="80%"
-            style={{ marginBottom: 6 }}
-          />
+          <>
+            <Skeleton
+              animation="wave"
+              variant="rect"
+              className="media"
+              height={10}
+              width="50%"
+            />
+            <Skeleton
+              animation="wave"
+              height={10}
+              width="50%"
+              style={{ marginBottom: 2 }}
+            />
+          </>
         }
-        subheader={<Skeleton animation="wave" height={10} width="40%" />}
+        subheader={
+          <Skeleton animation="wave" variant="rect" height={10} width="50%" />
+        }
       />
       <Skeleton animation="wave" variant="rect" className="media" />
       <CardContent>
