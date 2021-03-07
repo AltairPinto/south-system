@@ -1,12 +1,11 @@
 import { Reducer } from 'redux';
 import { FavoritesState, FavoritesTypes } from './types';
 
-const data = JSON.parse(
-  localStorage.getItem(process.env.REACT_APP_LOCAL_STORAGE || '') || '[]',
-);
-
 const INITIAL_STATE: FavoritesState = {
-  data: data.data || [],
+  data:
+    JSON.parse(
+      localStorage.getItem(process.env.REACT_APP_LOCAL_STORAGE || '') || '[]',
+    ) || [],
 };
 
 const reducer: Reducer<FavoritesState> = (state = INITIAL_STATE, action) => {

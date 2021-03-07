@@ -29,7 +29,7 @@ const BookSearch: React.FC = () => {
     const loadingArr = [];
     for (let i = 0; i < 8; i++) {
       loadingArr.push(
-        <Col key={i} xs={12} sm={12} md={6} lg={3} xl={3}>
+        <Col key={i} xs={12} sm={12} md={4} lg={3} xl={3}>
           <LoadingCard />
         </Col>,
       );
@@ -88,7 +88,7 @@ const BookSearch: React.FC = () => {
             {loading
               ? loadingPage()
               : books?.map((book: Book) => (
-                  <Col key={book.etag} xs={12} sm={12} md={6} lg={3} xl={3}>
+                  <Col key={book.etag} xs={12} sm={6} md={4} lg={3} xl={3}>
                     <BookCard {...book} />
                   </Col>
                 ))}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card, Col, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { refactorAuthors } from '../../services/mask';
@@ -14,29 +14,22 @@ import './styles.scss';
 const BookCard: React.FC<BookType> = book => {
   const favorites = useSelector((state: ApplicationState) => state.favorites);
   const dispatch = useDispatch();
-  const [favorite, handleFavorite] = useState<boolean>(false);
   const { volumeInfo, saleInfo } = book;
   const { authors, title, description, previewLink } = volumeInfo;
 
-  const checkFavorite = () => {
-    if (favorites.data.length) {
-      console.log('favorites.data', favorites.data);
-      const result = favorites.data.filter(
-        (favorite: BookType) => favorite.id === book.id,
-      );
-      if (result.length > 0) handleFavorite(true);
-      else return false;
-    }
-  };
+  const checkFavorite = favorites.data.filter(
+    (favorite: BookType) => favorite.id === book.id,
+  ).length;
 
   return (
     <Card className="book-card">
       {volumeInfo && (
         <Card.Body>
           <Card.Title>
-            <Row>
+            <Row className="card-top">
               <Col xs={6}>
                 <img
+                  className="thumb"
                   src={
                     volumeInfo.imageLinks
                       ? volumeInfo.imageLinks.thumbnail
@@ -90,7 +83,7 @@ const BookCard: React.FC<BookType> = book => {
               <OverlayTrigger
                 overlay={
                   <Tooltip id={book.id + '_i_' + book.etag}>
-                    {favorite
+                    {checkFavorite
                       ? 'Remover dos favoritos'
                       : 'Adicionar aos favoritos'}
                   </Tooltip>
@@ -100,13 +93,13 @@ const BookCard: React.FC<BookType> = book => {
               >
                 <img
                   src={
-                    favorite
+                    checkFavorite
                       ? require('../../images/stars/10.svg')
                       : require('../../images/stars/0.svg')
                   }
                   alt="favorite"
                   onClick={() =>
-                    favorite
+                    checkFavorite
                       ? dispatch(removeFavorites(book))
                       : dispatch(updateFavorites(book))
                   }

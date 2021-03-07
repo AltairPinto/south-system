@@ -8,9 +8,14 @@
   margin-bottom: 10px;
   transition: transform .2s;
 
-  img {
+  .col-6:first-child {
+    padding-right: 0px;
+  }
+
+  .thumb {
     border: 1px solid $gray_texts;
     border-radius: 5px;
+    width: 100% !important;
   }
 
   &:hover {
@@ -61,4 +66,11 @@
     }
   }
 
+  .mr-0 {
+    padding-right: 0px;
+  }
+
+  .card-top {
+    display: inline-flex;
+  }
 }
