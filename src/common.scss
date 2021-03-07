@@ -99,8 +99,8 @@ body {
   left: 0px;
   overflow-x: hidden;
 
-  background-image: url(./images/pexels-ksenia-chernaya-3952078.jpg);
-  background-color: #f3f3f4 !important;
+  // background-image: url(./images/pexels-ksenia-chernaya-3952078.jpg);
+  background-color: rgba($color: $gray, $alpha: .9) !important;
   background-position: center !important;
   background-repeat: no-repeat;
   background-attachment: fixed !important;

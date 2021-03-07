@@ -1,0 +1,12 @@
+@import '../../mixin.scss';
+
+.book-search {
+  font: 24px/12px Quicksand-Regular;
+
+  h3 {
+    background-color: rgba($color: $white, $alpha: 0.9);
+    border-radius: 10px;
+  }
+
+  border-radius: 25px;
+}
