@@ -26,7 +26,7 @@ const SearchBar: React.FC = () => {
     if (bookTitle.trim()) {
       handleLoading(true);
       dispatch(updateWord(bookTitle));
-      if (word.data === bookTitle) setTimeout(() => handleLoading(false), 1500);
+      if (word.data === bookTitle) handleLoading(false);
     }
   };
   return (
