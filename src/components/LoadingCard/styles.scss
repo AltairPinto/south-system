@@ -1,0 +1,13 @@
+@import '../../mixin.scss';
+
+.book-card-loading {
+  width: 100%;
+  height: 355px;
+  border: 1px solid $gray;
+  border-radius: 10px !important;
+  margin-bottom: 10px;
+
+  .media {
+    height: 190px;
+  }
+}

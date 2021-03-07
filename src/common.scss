@@ -98,25 +98,21 @@ body {
   top: 0px;
   left: 0px;
   overflow-x: hidden;
-  padding-right: 0px !important;
 
-  max-width: 100%;
-  // background-image: url(./images/new-york-city-silhouette-skyline-cityscape-building-silhouette-building-skyline-png-4186_1562.png) !important;
-  background-color: #f3f3f4 !important;
-  background-position: bottom !important;
+  // background-image: url(./images/pexels-ksenia-chernaya-3952078.jpg);
+  background-color: rgba($color: $gray, $alpha: .9) !important;
+  background-position: center !important;
   background-repeat: no-repeat;
   background-attachment: fixed !important;
-  // background-size: 100%;
-  opacity: 1;
+  background-size: 100%;
 
   @media only screen and (min-width: 1000px) {}
 }
 
 .spinner-loading {
-  position: absolute;
-  left: 47.5%;
-  top: 47.5%;
-  color: $purple;
+  width: 20px !important;
+  height: 20px !important;
+  color: $blue;
 }
 
 .justify-content {
@@ -184,22 +180,6 @@ a {
   }
 }
 
-.not-found {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-
-  img {
-    margin-top: 20px;
-    min-height: 100px;
-    padding: 0px 10px 0px 10px;
-    max-width: 100vw;
-    height: auto;
-    width: auto;
-    max-height: 60vh;
-  }
-}
-
 .fade-in {
   animation: fadeIn 1s ease forwards;
 }
@@ -225,4 +205,16 @@ a {
 
 html {
   overflow: inherit;
+}
+
+.MuiPagination-ul {
+  .MuiPaginationItem-root {
+    color: black !important;
+    outline: none;
+  }
+
+  .MuiPaginationItem-page.Mui-selected {
+    color: $blue !important;
+    background-color: transparent;
+  }
 }

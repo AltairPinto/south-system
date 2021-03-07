@@ -1,0 +1,17 @@
+@import '../../mixin.scss';
+
+.container-pagination {
+  justify-content: space-between;
+  background-color: rgba($color: $white, $alpha: 0.9);
+  border-radius: 10px;
+  padding: 10px;
+
+  p {
+    font: 16px/22px Quicksand-Regular;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: black;
+    margin-bottom: 0px;
+  }
+}

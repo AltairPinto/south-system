@@ -1,9 +1,14 @@
 import React from 'react';
-
-// import { Container } from './styles';
+import { BookFavorites, BookSearch, SearchBar } from '../../components';
 
 const Home: React.FC = () => {
-  return <div />;
+  return (
+    <>
+      <SearchBar />
+      <BookFavorites />
+      <BookSearch />
+    </>
+  );
 };
 
 export default Home;

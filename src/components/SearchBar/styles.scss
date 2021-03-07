@@ -1,0 +1,71 @@
+@import '../../mixin.scss';
+
+.search-bar {
+
+  .navbar-brand {
+    color: $white !important;
+  }
+
+  .menu-nav {
+    width: 100%;
+  }
+
+  .search-form {
+    width: 90%;
+    flex-flow: nowrap;
+  }
+
+  .input {
+    border: 1px solid $gray;
+    border-radius: 5px;
+    width: 90% !important;
+
+    &::placeholder {
+      font: 16px/33px Quicksand-Bold;
+      color: #B7B7B7;
+    }
+  }
+
+  .btn-search {
+    border-color: $blue;
+    background-color: transparent;
+    color: $blue;
+
+    &:hover {
+      background-color: $blue;
+      color: $white;
+    }
+
+    &:active,
+    &:focus {
+      background-color: transparent;
+      color: $blue;
+    }
+  }
+
+  @media only screen and (max-width: 736px) {
+    border-bottom: 4px solid $blue;
+
+    .navbar-nav {
+      flex-direction: column !important;
+      padding-left: 0 !important;
+      margin-bottom: 0 !important;
+      list-style: none !important;
+    }
+
+    .form {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 576px) {
+    border-bottom: 4px solid $blue;
+
+    .form {
+      border-left: 2px solid $gray;
+      padding-left: 12px;
+      margin-left: 10px;
+    }
+
+  }
+}
