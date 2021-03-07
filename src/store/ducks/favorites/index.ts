@@ -23,7 +23,6 @@ const reducer: Reducer<FavoritesState> = (state = INITIAL_STATE, action) => {
 
     case FavoritesTypes.REMOVE_FAVORITES:
       const tempFavorites = updatedFavoritesState.data.indexOf(action.payload);
-      console.log('tempFavorites', tempFavorites);
       updatedFavoritesState.data.splice(tempFavorites, 1);
       localStorage.setItem(
         process.env.REACT_APP_LOCAL_STORAGE || '',
