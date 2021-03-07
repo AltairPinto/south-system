@@ -12,7 +12,7 @@ export enum FavoritesTypes {
 
 /**
  * State type
- * @data : the word inserted by user
+ * @data : the book inserted by user
  */
 export interface FavoritesState {
   data: Book[];

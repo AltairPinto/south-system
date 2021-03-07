@@ -13,7 +13,7 @@ const BookFavorites: React.FC = () => {
 
   const [totalItems, handleTotalItems] = useState<number>(0);
   const [currentPage, handleCurrentPage] = useState<number>(1);
-  const booksPerPage = 4;
+  const booksPerPage = 6;
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks =
@@ -27,7 +27,7 @@ const BookFavorites: React.FC = () => {
     const loadingArr = [];
     for (let i = 0; i < booksPerPage; i++) {
       loadingArr.push(
-        <Col key={i} xs={12} sm={12} md={4} lg={3} xl={3}>
+        <Col key={i} xs={12} sm={6} md={4} lg={4} xl={3}>
           <LoadingCard />
         </Col>,
       );
@@ -61,11 +61,11 @@ const BookFavorites: React.FC = () => {
               <Skeleton animation="wave" variant="text" width="100%" />
             )}
           </h3>
-          <Row className="fade-in mt-4">
+          <Row className="fade-in mt-4" aria-label="book-favorites">
             {loading
               ? loadingPage()
               : currentBooks?.map((book: Book) => (
-                  <Col key={book.etag} xs={12} sm={6} md={4} lg={3} xl={3}>
+                  <Col key={book.etag} xs={12} sm={6} md={6} lg={4} xl={3}>
                     <BookCard {...book} />
                   </Col>
                 ))}

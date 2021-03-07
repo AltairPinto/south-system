@@ -19,7 +19,7 @@ const SearchBar: React.FC = () => {
 
   const searchBook = (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(updateWord(bookTitle));
+    if (bookTitle.trim()) dispatch(updateWord(bookTitle));
   };
   return (
     <Navbar className="search-bar" bg="dark" expand="lg" fixed="top">
@@ -35,13 +35,14 @@ const SearchBar: React.FC = () => {
           onChange={event => handleBookTitle(event.target.value)}
           placeholder="Digite o que deseja pesquisar"
           className="input mr-2"
+          aria-label="input-search"
         />
         <OverlayTrigger
           overlay={<Tooltip id="1">Pesquisar</Tooltip>}
           key={1}
           placement="bottom"
         >
-          <Button className="btn-search" type="submit">
+          <Button className="btn-search" type="submit" aria-label="btn-search">
             <FontAwesome name="search" type="fas" />
           </Button>
         </OverlayTrigger>

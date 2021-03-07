@@ -49,7 +49,7 @@ const BookCard: React.FC<BookType> = book => {
                   placement="top"
                 >
                   <b>
-                    {title.length > 30 ? title.substring(0, 29) + '...' : title}
+                    {title.length > 30 ? title.substring(0, 30) + '...' : title}
                   </b>
                 </OverlayTrigger>
                 <Card.Subtitle className="mb-2 text-muted">
@@ -92,6 +92,7 @@ const BookCard: React.FC<BookType> = book => {
                 placement="top"
               >
                 <img
+                  aria-label={'btn-favorite-' + book.id}
                   src={
                     checkFavorite
                       ? require('../../images/stars/10.svg')

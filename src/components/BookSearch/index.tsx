@@ -1,6 +1,6 @@
 import { Skeleton } from '@material-ui/lab';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { BookCard, LoadingCard, NotFound, Pagination } from '..';
@@ -15,18 +15,20 @@ const BookSearch: React.FC = () => {
   const [books, handleBooks] = useState<Book[]>([]);
   const [totalItems, handleTotalItems] = useState<number>(0);
   const [currentPage, handleCurrentPage] = useState<number>(1);
-  const booksPerPage = 8;
+  const booksPerPage = 9;
   const startIndex =
     currentPage > 1 ? currentPage * booksPerPage : currentPage - 1;
   const paginate = (pageNumber: number) => handleCurrentPage(pageNumber);
 
   const [loading, handleLoading] = useState<boolean>(false);
 
+  const scrollTo = useRef<null | HTMLInputElement>(null);
+
   const loadingPage = () => {
     const loadingArr = [];
     for (let i = 0; i < booksPerPage; i++) {
       loadingArr.push(
-        <Col key={i} xs={12} sm={12} md={4} lg={3} xl={3}>
+        <Col key={i} xs={12} sm={6} md={4} lg={4} xl={3}>
           <LoadingCard />
         </Col>,
       );
@@ -34,11 +36,11 @@ const BookSearch: React.FC = () => {
     return loadingArr;
   };
 
-  const scrollTo = (ref: any) => {
-    if (ref /* + other conditions */) {
-      ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  // const scrollTo = (ref: HTMLElement) => {
+  //   if (ref) {
+  //     ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  //   }
+  // };
 
   useEffect(() => {
     if (word.data) {
@@ -61,6 +63,10 @@ const BookSearch: React.FC = () => {
             handleTotalItems(totalItems);
             handleBooks(items);
             handleLoading(false);
+            scrollTo.current?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
           }
         })
         .catch(() => {
@@ -88,11 +94,11 @@ const BookSearch: React.FC = () => {
               <Skeleton animation="wave" variant="text" width="100%" />
             )}
           </h3>
-          <Row className="fade-in mt-4">
+          <Row className="fade-in mt-4" aria-label="book-board">
             {loading
               ? loadingPage()
               : books?.map((book: Book) => (
-                  <Col key={book.etag} xs={12} sm={6} md={4} lg={3} xl={3}>
+                  <Col key={book.etag} xs={12} sm={6} md={4} lg={4} xl={3}>
                     <BookCard {...book} />
                   </Col>
                 ))}
