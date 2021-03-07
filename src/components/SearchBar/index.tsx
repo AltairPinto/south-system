@@ -22,7 +22,7 @@ const SearchBar: React.FC = () => {
     dispatch(updateWord(bookTitle));
   };
   return (
-    <Navbar className="search-bar" bg="dark" expand="lg">
+    <Navbar className="search-bar" bg="dark" expand="lg" fixed="top">
       <Navbar.Brand href="/">Busque aqui pelo livro que deseja: </Navbar.Brand>
       <Form
         className="search-form"

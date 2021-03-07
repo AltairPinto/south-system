@@ -34,6 +34,12 @@ const BookSearch: React.FC = () => {
     return loadingArr;
   };
 
+  const scrollTo = (ref: any) => {
+    if (ref /* + other conditions */) {
+      ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   useEffect(() => {
     if (word.data) {
       handleLoading(true);
@@ -70,7 +76,8 @@ const BookSearch: React.FC = () => {
       md={12}
       lg={12}
       xl={12}
-      className="book-search fade-in mt-4"
+      className="book-search fade-in"
+      ref={scrollTo}
     >
       {word.data && totalItems > 0 && (
         <>

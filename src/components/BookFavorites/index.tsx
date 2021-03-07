@@ -11,7 +11,6 @@ import './styles.scss';
 const BookFavorites: React.FC = () => {
   const favorites = useSelector((state: ApplicationState) => state.favorites);
 
-  const [books, handleBooks] = useState<Book[]>([]);
   const [totalItems, handleTotalItems] = useState<number>(0);
   const [currentPage, handleCurrentPage] = useState<number>(1);
   const booksPerPage = 4;
@@ -39,7 +38,6 @@ const BookFavorites: React.FC = () => {
   useEffect(() => {
     if (favorites.data) {
       handleLoading(true);
-      handleBooks(favorites.data);
       handleTotalItems(favorites.data.length);
       handleLoading(false);
     }
@@ -52,7 +50,7 @@ const BookFavorites: React.FC = () => {
       md={12}
       lg={12}
       xl={12}
-      className="book-search fade-in mt-4"
+      className="book-favorites fade-in mt-4"
     >
       {favorites.data && totalItems > 0 && (
         <>
