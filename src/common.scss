@@ -110,9 +110,8 @@ body {
 }
 
 .spinner-loading {
-  position: absolute;
-  left: 47.5%;
-  top: 47.5%;
+  width: 20px !important;
+  height: 20px !important;
   color: $blue;
 }
 
